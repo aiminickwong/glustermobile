@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.gluster.mobile.activities"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/gluster"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="org.gluster.mobile.activities.VolumeDisplayActivity"
+            android:label="@string/title_activity_volume_display" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.ClusterDisplayActivity"
+            android:label="@string/title_activity_cluster_display" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.ClusterPropertiesActivity"
+            android:label="@string/title_activity_cluster_properties" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.VolumeHostsActivity"
+            android:label="@string/title_activity_volume_hosts" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.HostsDisplayActivity"
+            android:label="@string/title_activity_hosts_display" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.BrickOptionActivity"
+            android:label="@string/title_activity_brick_option_display" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.BrickDisplayActivity"
+            android:label="@string/title_activity_hosts_display" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.OptionsActivity"
+            android:label="@string/title_activity_hosts_display" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.LoginMainActivity"
+            android:label="@string/title_activity_login_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.VolumePropertiesActivity"
+            android:label="@string/title_activity_volume_properties" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.HostPropertiesActivity"
+            android:label="@string/title_activity_host_properties" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.BrickPropertyActivity"
+            android:label="@string/title_activity_brick_property" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.StartVolumeActivity"
+            android:label="@string/title_activity_start_volume" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.VolumeStartStopActivity"
+            android:label="@string/title_activity_volume_start_stop" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.ClusterAddActivity"
+            android:label="@string/title_activity_cluster_add" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.VolumeCreateActivity"
+            android:label="@string/title_activity_volume_create" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.BrickAddActivity"
+            android:label="@string/title_activity_brick_add" >
+        </activity>
+    </application>
+
+</manifest>
