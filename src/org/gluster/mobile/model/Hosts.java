@@ -6,9 +6,9 @@ import java.util.List;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-@Root(name = "hosts")
+@Root(name = "xml")
 public class Hosts implements GlusterEntities {
-	@ElementList(name = "hosts", required = true, inline = true)
+	@ElementList(name = "hosts", required = false, inline = true)
 	private ArrayList<Host> hosts = new ArrayList<Host>();
 
 	public ArrayList<Host> getHosts() {

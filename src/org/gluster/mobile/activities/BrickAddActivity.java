@@ -134,8 +134,7 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 		atp.setActivity(BrickAddActivity.this);
 		atp.setContext(getApplicationContext());
 		atp.setHost(ConnectionUtil.getInstance().getHost());
-		atp.setUrl("http://" + ConnectionUtil.getInstance().getHost()
-				+ "/api/hosts/");
+		atp.setUrl(getIntent().getExtras().getString("clusterHostUrl"));
 		atp.setClassNames(Hosts.class);
 		atp.setChoice(2);
 		// atp.setChoice(4);

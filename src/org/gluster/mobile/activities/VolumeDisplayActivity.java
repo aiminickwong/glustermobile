@@ -13,8 +13,10 @@ import org.gluster.mobile.web.HttpPageGetter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -23,6 +25,7 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 	public static ListView lists;
 	public static String[] names;
 	private String name;
+	private Button create;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 		setContentView(R.layout.activity_volume_display);
 		lists = (ListView) findViewById(R.id.listView1);
 		name = getIntent().getExtras().getString("name");
+		create = (Button) findViewById(R.id.button1);
 		url = getIntent().getExtras().getString("url") + "/glustervolumes/";
 		System.out.println("Context is : " + VolumeDisplayActivity.this
 				+ "In volumeDisplayActivity");
@@ -45,6 +49,23 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 		// p.setListOrText(true);
 		System.out.println("in volume display activity");
 		new HttpPageGetter<Volumes, Volume>().execute(p);
+		create.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent nextPage = new Intent(VolumeDisplayActivity.this,
+						VolumeCreateActivity.class);
+				Bundle nPParams = new Bundle();
+				nPParams.putString("url", url);
+				nPParams.putString("name", name);
+				nPParams.putString("clusterHostUrl", getIntent().getExtras()
+						.getString("clusterHostUrl"));
+				nextPage.putExtras(nPParams);
+				startActivity(nextPage);
+
+			}
+		});
 
 	}
 

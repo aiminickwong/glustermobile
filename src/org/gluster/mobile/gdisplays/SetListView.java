@@ -356,6 +356,7 @@ public class SetListView<G extends GlusterEntity> {
 							Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(p));
 				}
 			});
+			/*
 			button.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -371,6 +372,7 @@ public class SetListView<G extends GlusterEntity> {
 
 				}
 			});
+			*/
 			break;
 		}
 		case 4: {

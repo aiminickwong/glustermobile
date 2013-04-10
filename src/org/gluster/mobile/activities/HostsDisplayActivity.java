@@ -1,5 +1,6 @@
 package org.gluster.mobile.activities;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,21 @@ public class HostsDisplayActivity extends GlusterActivity<Host> {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hosts_display);
-		url = "http://" + ConnectionUtil.getInstance().getHost()
-				+ "/api/hosts/";
+		String searchCluster = "cluster="
+				+ getIntent().getExtras().getString("clusterName");
+		/*
+		 * url = "http://" + ConnectionUtil.getInstance().getHost() +
+		 * "/api/hosts/?search=cluster%3D" +
+		 * getIntent().getExtras().getString("clusterName");
+		 */
+		try {
+			url = "http://" + ConnectionUtil.getInstance().getHost()
+					+ "/api/hosts/?search="
+					+ URLEncoder.encode(searchCluster, "utf-8");
+		} catch (Exception error) {
+			System.out.println(error.toString());
+		}
+
 		clusterId = getIntent().getExtras().getString("clusterid");
 		lists = (ListView) findViewById(R.id.listView1);
 		AsyncTaskParameters<Hosts> atp = new AsyncTaskParameters<Hosts>();

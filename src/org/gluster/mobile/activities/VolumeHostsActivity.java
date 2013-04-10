@@ -1,5 +1,9 @@
 package org.gluster.mobile.activities;
 
+import java.net.URLEncoder;
+
+import org.gluster.mobile.web.ConnectionUtil;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +32,17 @@ public class VolumeHostsActivity extends TabActivity {
 		System.out.println("In volumehosts activity url is  : " + clusterUrl);
 		clusterVolumeUrl.putString("url", clusterUrl);
 		clusterVolumeUrl.putString("name", title);
+		String searchCluster = "cluster=" + title;
+		try {
+			clusterVolumeUrl.putString(
+					"clusterHostUrl",
+					"http://" + ConnectionUtil.getInstance().getHost()
+							+ "/api/hosts/?search="
+							+ URLEncoder.encode(searchCluster, "utf-8"));
+		} catch (Exception error) {
+			System.out.println(error.toString());
+		}
+
 		Intent volumesIntent = new Intent(VolumeHostsActivity.this,
 				VolumeDisplayActivity.class);
 		volumesIntent.putExtras(clusterVolumeUrl);
@@ -39,6 +54,7 @@ public class VolumeHostsActivity extends TabActivity {
 		hostClusterId.putString("clusterid", clusterid);
 		hostClusterId.putString("url", getIntent().getExtras()
 				.getString("host") + "/api/hosts/");
+		hostClusterId.putString("clusterName", title);
 		Intent hostsIntent = new Intent(VolumeHostsActivity.this,
 				HostsDisplayActivity.class);
 		hostsIntent.putExtras(hostClusterId);

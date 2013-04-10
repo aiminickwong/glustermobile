@@ -108,6 +108,8 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 					access_protocol += 1;
 				}
 				nextPageParams.putInt("access_protocol", access_protocol);
+				nextPageParams.putString("clusterHostUrl", getIntent()
+						.getExtras().getString("clusterHostUrl"));
 				Intent nextPage = new Intent(VolumeCreateActivity.this,
 						BrickAddActivity.class);
 				nextPage.putExtras(nextPageParams);
