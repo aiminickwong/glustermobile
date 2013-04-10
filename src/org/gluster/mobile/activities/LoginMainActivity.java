@@ -38,6 +38,7 @@ public class LoginMainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+
 				// TODO Auto-generated method stub
 				setEntries();
 				System.out.println(sHostName + "\n" + sPassword + "\n" + sUser);
