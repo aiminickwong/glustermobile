@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/menu_settings"/>
+    <item
+        android:id="@+id/Next"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/Next"/>
+    <item
+        android:id="@+id/cancel"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/Cancel"/>
+
+</menu>

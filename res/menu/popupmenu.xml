@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:id="@+id/group_popupmenu" >
+        <item
+            android:id="@+id/menu1"
+            android:orderInCategory="0"
+            android:title="Properties"/>
+        <item
+            android:id="@+id/menu2"
+            android:orderInCategory="1"
+            android:title="Delete"/>
+        <item
+            android:id="@+id/menu3"
+            android:orderInCategory="2"
+            android:title="Start"/>
+        <item
+            android:id="@+id/menu4"
+            android:orderInCategory="3"
+            android:title="Stop"/>
+        <item
+            android:id="@+id/menu5"
+            android:orderInCategory="4"
+            android:title="Create"/>
+    </group>
+
+</menu>
