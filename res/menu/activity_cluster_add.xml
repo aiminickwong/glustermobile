@@ -5,5 +5,17 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/menu_settings"/>
+    <item
+        android:id="@+id/Done"
+        android:icon="@drawable/tick"
+        android:orderInCategory="1"
+        android:showAsAction="always"
+        android:title="@string/Done"/>
+    <item
+        android:id="@+id/Cancel"
+        android:icon="@drawable/button_cancel"
+        android:orderInCategory="2"
+        android:showAsAction="always"
+        android:title="@string/Cancel"/>
 
 </menu>
