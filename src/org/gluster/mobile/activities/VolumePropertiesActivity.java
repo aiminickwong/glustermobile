@@ -8,10 +8,12 @@ import org.gluster.mobile.model.Cluster;
 import org.gluster.mobile.model.Volume;
 import org.gluster.mobile.model.Volumes;
 import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.HttpPageGetter;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class VolumePropertiesActivity extends GlusterActivity<Volume> {
@@ -44,6 +46,16 @@ public class VolumePropertiesActivity extends GlusterActivity<Volume> {
 		objectList.add(object);
 		System.out.println(objectList.size());
 		new SetTextView(props, objectList, 7).display(7);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.Settings:
+			new SettingsHandler(VolumePropertiesActivity.this).handle();
+			break;
+		}
+		return true;
 	}
 
 	@Override

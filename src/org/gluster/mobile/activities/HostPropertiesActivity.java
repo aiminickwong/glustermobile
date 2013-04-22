@@ -8,10 +8,12 @@ import org.gluster.mobile.model.Cluster;
 import org.gluster.mobile.model.Host;
 import org.gluster.mobile.model.Hosts;
 import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.HttpPageGetter;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class HostPropertiesActivity extends GlusterActivity<Host> {
@@ -54,6 +56,16 @@ public class HostPropertiesActivity extends GlusterActivity<Host> {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_host_properties, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.Settings:
+			new SettingsHandler(HostPropertiesActivity.this).handle();
+			break;
+		}
 		return true;
 	}
 }

@@ -10,6 +10,7 @@ import org.gluster.mobile.gdisplays.ListDisplay;
 import org.gluster.mobile.model.Host;
 import org.gluster.mobile.model.Hosts;
 import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.HttpPageGetter;
 
@@ -124,6 +125,16 @@ public class HostsDisplayActivity extends GlusterActivity<Host> {
 			listViewParams.add(host);
 		}
 		return listViewParams;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.Settings:
+			new SettingsHandler(HostsDisplayActivity.this).handle();
+			break;
+		}
+		return true;
 	}
 
 	@Override

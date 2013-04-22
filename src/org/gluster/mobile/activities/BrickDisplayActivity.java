@@ -9,6 +9,7 @@ import org.gluster.mobile.gdisplays.ListDisplay;
 import org.gluster.mobile.model.Brick;
 import org.gluster.mobile.model.Bricks;
 import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.HttpPageGetter;
 
 import android.content.Intent;
@@ -119,9 +120,20 @@ public class BrickDisplayActivity extends GlusterActivity<Brick> {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.activity_brick_display, menu);
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.Settings:
+			new SettingsHandler(BrickDisplayActivity.this).handle();
+			break;
+		}
 		return true;
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.activity_brick_display, menu);
+		return true;
+	}
+
 }

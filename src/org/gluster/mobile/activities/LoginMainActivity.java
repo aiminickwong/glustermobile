@@ -167,18 +167,11 @@ public class LoginMainActivity extends GlusterActivity {
 	public String getsHostName() {
 		return hostname.getText().toString();
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_login_main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		new SettingsHandler(LoginMainActivity.this).handle();
-		return true;
-	}
+	/*
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the
+	 * menu; this adds items to the action bar if it is present.
+	 * getMenuInflater().inflate(R.menu.activity_login_main, menu); return true;
+	 * }
+	 */
 
 }

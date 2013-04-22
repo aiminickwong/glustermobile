@@ -5,6 +5,7 @@ import org.gluster.mobile.gdisplays.SetAlertBox;
 import org.gluster.mobile.model.Cluster;
 import org.gluster.mobile.model.DataCenter;
 import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.HttpPostRequests;
 import org.gluster.mobile.xml.EntitySerializer;
@@ -58,7 +59,9 @@ public class ClusterAddActivity extends GlusterActivity<Cluster> {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-
+		case R.id.Settings:
+			new SettingsHandler(ClusterAddActivity.this).handle();
+			break;
 		case R.id.Done:
 			createCluster();
 			break;

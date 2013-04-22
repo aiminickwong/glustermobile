@@ -47,31 +47,31 @@ public final class R {
         public static final int go_right=0x7f020005;
         public static final int ic_launcher=0x7f020006;
         public static final int listview=0x7f020007;
-        public static final int tick=0x7f020008;
+        public static final int settings=0x7f020008;
+        public static final int tick=0x7f020009;
     }
     public static final class id {
         public static final int Cancel=0x7f090025;
-        public static final int CreateVolume=0x7f09002b;
+        public static final int CreateVolume=0x7f090029;
         public static final int Done=0x7f090024;
-        public static final int Next=0x7f090029;
-        public static final int Settings=0x7f090028;
-        public static final int action_settings=0x7f09002c;
+        public static final int Next=0x7f090027;
+        public static final int Settings=0x7f090023;
         public static final int autoCompleteTextView1=0x7f090016;
         public static final int brickProps=0x7f090007;
         public static final int button1=0x7f090005;
-        public static final int cancel=0x7f09002a;
+        public static final int cancel=0x7f090028;
         public static final int checkBox1=0x7f090019;
         public static final int checkBox2=0x7f09001b;
         public static final int checkBox3=0x7f09001c;
         public static final int create=0x7f090026;
-        public static final int done=0x7f09002d;
+        public static final int done=0x7f09002a;
         public static final int editText1=0x7f090004;
         public static final int editText2=0x7f090017;
         public static final int elementProperty1=0x7f090020;
         public static final int elementProperty2=0x7f090021;
         public static final int email=0x7f090010;
         public static final int glusterElement=0x7f09001f;
-        public static final int group_popupmenu=0x7f09002e;
+        public static final int group_popupmenu=0x7f09002b;
         public static final int hostProps=0x7f09000a;
         public static final int hostname=0x7f090013;
         public static final int listView1=0x7f090006;
@@ -79,13 +79,11 @@ public final class R {
         public static final int login_form=0x7f09000d;
         public static final int login_status=0x7f09000b;
         public static final int login_status_message=0x7f09000c;
-        public static final int menu1=0x7f09002f;
-        public static final int menu2=0x7f090030;
-        public static final int menu3=0x7f090031;
-        public static final int menu4=0x7f090032;
-        public static final int menu5=0x7f090033;
-        public static final int menu_forgot_password=0x7f090027;
-        public static final int menu_settings=0x7f090023;
+        public static final int menu1=0x7f09002c;
+        public static final int menu2=0x7f09002d;
+        public static final int menu3=0x7f09002e;
+        public static final int menu4=0x7f09002f;
+        public static final int menu5=0x7f090030;
         public static final int pager=0x7f090014;
         public static final int pager_title_strip=0x7f090015;
         public static final int password=0x7f09000e;
@@ -131,7 +129,7 @@ public final class R {
         public static final int main=0x7f030018;
     }
     public static final class menu {
-        public static final int a=0x7f080000;
+        public static final int activity_brick_display=0x7f080000;
         public static final int activity_brick_option=0x7f080001;
         public static final int activity_brick_property=0x7f080002;
         public static final int activity_cluster_add=0x7f080003;
@@ -141,21 +139,15 @@ public final class R {
         public static final int activity_dummy_screen=0x7f080007;
         public static final int activity_host_properties=0x7f080008;
         public static final int activity_hosts_display=0x7f080009;
-        public static final int activity_login=0x7f08000a;
-        public static final int activity_login_main=0x7f08000b;
-        public static final int activity_main=0x7f08000c;
-        public static final int activity_options=0x7f08000d;
-        public static final int activity_server_tab_fragment=0x7f08000e;
-        public static final int activity_start_volume=0x7f08000f;
-        public static final int activity_tab_main=0x7f080010;
-        public static final int activity_volume_create=0x7f080011;
-        public static final int activity_volume_display=0x7f080012;
-        public static final int activity_volume_hosts=0x7f080013;
-        public static final int activity_volume_properties=0x7f080014;
-        public static final int activity_volume_start_stop=0x7f080015;
-        public static final int brick_add=0x7f080016;
-        public static final int popupmenu=0x7f080017;
-        public static final int settings=0x7f080018;
+        public static final int activity_login_main=0x7f08000a;
+        public static final int activity_options=0x7f08000b;
+        public static final int activity_volume_create=0x7f08000c;
+        public static final int activity_volume_display=0x7f08000d;
+        public static final int activity_volume_hosts=0x7f08000e;
+        public static final int activity_volume_properties=0x7f08000f;
+        public static final int brick_add=0x7f080010;
+        public static final int popupmenu=0x7f080011;
+        public static final int settings=0x7f080012;
     }
     public static final class string {
         public static final int AccessProtocols=0x7f060035;

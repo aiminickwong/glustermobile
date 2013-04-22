@@ -10,6 +10,7 @@ import org.gluster.mobile.model.Volume;
 import org.gluster.mobile.model.Volumes;
 import org.gluster.mobile.params.AsyncTaskParameters;
 import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.HttpPageGetter;
 import org.gluster.mobile.web.HttpPostRequests;
@@ -253,6 +254,9 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.Settings:
+			new SettingsHandler(VolumeDisplayActivity.this).handle();
+			break;
 		case R.id.CreateVolume:
 			createVolume();
 			break;

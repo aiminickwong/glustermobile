@@ -16,6 +16,7 @@ import org.gluster.mobile.model.VolumeCreate;
 import org.gluster.mobile.model.Volumes;
 import org.gluster.mobile.params.AsyncTaskParameters;
 import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.HttpPageGetter;
 import org.gluster.mobile.web.HttpPostRequests;
@@ -234,7 +235,9 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-
+		case R.id.Settings:
+			new SettingsHandler(BrickAddActivity.this).handle();
+			break;
 		case R.id.done:
 			createVolume();
 			break;

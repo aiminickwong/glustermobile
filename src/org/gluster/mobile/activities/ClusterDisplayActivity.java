@@ -12,6 +12,7 @@ import org.gluster.mobile.model.Cluster;
 import org.gluster.mobile.model.Clusters;
 import org.gluster.mobile.params.AsyncTaskParameters;
 import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.HttpDeleteRequests;
 import org.gluster.mobile.web.HttpPageGetter;
@@ -206,6 +207,9 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 		case R.id.create:
 			createCluster();
 			break;
+		case R.id.Settings:
+			new SettingsHandler(ClusterDisplayActivity.this).handle();
+			break;
 		}
 		return true;
 	}
@@ -216,4 +220,5 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 		getMenuInflater().inflate(R.menu.activity_cluster_display, menu);
 		return true;
 	}
+
 }

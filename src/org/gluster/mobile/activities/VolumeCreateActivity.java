@@ -8,6 +8,7 @@ import org.gluster.mobile.model.Host;
 import org.gluster.mobile.model.Option;
 import org.gluster.mobile.model.Options;
 import org.gluster.mobile.model.VolumeCreate;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.xml.EntitySerializer;
 
 import android.app.AlertDialog;
@@ -144,7 +145,9 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-
+		case R.id.Settings:
+			new SettingsHandler(VolumeCreateActivity.this).handle();
+			break;
 		case R.id.Next:
 			nextAddBricks();
 			break;

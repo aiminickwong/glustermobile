@@ -2,6 +2,7 @@ package org.gluster.mobile.activities;
 
 import java.net.URLEncoder;
 
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 
 import android.app.TabActivity;

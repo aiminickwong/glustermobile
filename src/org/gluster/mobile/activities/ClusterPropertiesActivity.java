@@ -7,10 +7,12 @@ import org.gluster.mobile.gdisplays.SetTextView;
 import org.gluster.mobile.model.Cluster;
 import org.gluster.mobile.model.Clusters;
 import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.HttpPageGetter;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class ClusterPropertiesActivity extends GlusterActivity<Cluster> {
@@ -43,6 +45,16 @@ public class ClusterPropertiesActivity extends GlusterActivity<Cluster> {
 		objectList.add(object);
 		System.out.println(objectList.size());
 		new SetTextView(display, objectList, 3).display(3);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.Settings:
+			new SettingsHandler(ClusterPropertiesActivity.this).handle();
+			break;
+		}
+		return true;
 	}
 
 	@Override
