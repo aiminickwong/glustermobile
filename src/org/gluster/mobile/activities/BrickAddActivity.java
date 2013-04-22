@@ -1,9 +1,11 @@
 package org.gluster.mobile.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
+import org.gluster.mobile.gdisplays.ListDisplay;
 import org.gluster.mobile.gdisplays.SetAlertBox;
 import org.gluster.mobile.model.AddError;
 import org.gluster.mobile.model.Brick;
@@ -26,10 +28,12 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 
 public class BrickAddActivity extends GlusterActivity<Host> {
@@ -41,9 +45,12 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 	private VolumeCreate newVolume;
 	private SharedPreferences loginCred;
 	private ListView addBricks;
-	private ArrayList<String> listViewElements;
+	private List<HashMap<String, String>> listViewElements;
 	private String[] server_ids;
 	private String[] server_names;
+	private PopupMenu pop;
+	int[] column_ids = { R.id.glusterElement, R.id.elementProperty1 };
+	String[] column_tags = { "bricks", "server" };
 
 	private VolumeCreate getResultObject(String xmlData) {
 		VolumeCreate tObj = null;
@@ -74,6 +81,7 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+
 				int i = 0;
 				int position = 0;
 				Brick volumeBrick = new Brick();
@@ -87,15 +95,62 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 
 				volumeBrick.setServer_id(server_ids[position]);
 				volumeBrick.setName(brickDir.getText().toString());
-				listViewElements.add(host.getSelectedItem().toString() + " "
-						+ brickDir.getText().toString());
-				ArrayAdapter<String> stringAdapter = new ArrayAdapter<String>(
-						getApplicationContext(), R.layout.list_view_style,
-						listViewElements);
-				addBricks.setAdapter(stringAdapter);
+				/*
+				 * listViewElements.add(host.getSelectedItem().toString() + " "
+				 * + brickDir.getText().toString()); ArrayAdapter<String>
+				 * stringAdapter = new ArrayAdapter<String>(
+				 * getApplicationContext(), R.layout.list_view_style,
+				 * listViewElements); addBricks.setAdapter(stringAdapter);
+				 */
+				HashMap<String, String> brickMap = new HashMap<String, String>();
+				brickMap.put(column_tags[0], host.getSelectedItem().toString());
+				brickMap.put(column_tags[1], brickDir.getText().toString());
+				listViewElements.add(brickMap);
+				new ListDisplay(addBricks, getApplicationContext(),
+						listViewElements, column_ids, column_tags).display();
 				bricks.add(volumeBrick);
+
 			}
 		});
+		addBricks
+				.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+					@Override
+					public boolean onItemLongClick(AdapterView<?> arg0,
+							View arg1, int arg2, final long position) {
+						// TODO Auto-generated method stub
+						setPopUp((int) position);
+						pop.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								// TODO Auto-generated method stub
+								switch (item.getItemId()) {
+								case 0:
+									deleteSelectedBrick((int) position);
+									new ListDisplay(addBricks,
+											getApplicationContext(),
+											listViewElements, column_ids,
+											column_tags).display();
+									break;
+								}
+								return false;
+							}
+						});
+						return false;
+					}
+				});
+	}
+
+	private void deleteSelectedBrick(int position) {
+		listViewElements.remove(position);
+		bricks.remove(position);
+	}
+
+	private void setPopUp(int position) {
+		pop = new PopupMenu(getApplicationContext(), addBricks);
+		pop.getMenu().add(0, 0, 0, "Remove");
+		pop.show();
 	}
 
 	private void createVolume() {
@@ -125,7 +180,7 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 		host = (Spinner) findViewById(R.id.spinner1);
 		bricks = new ArrayList<Brick>();
 		addBricks = (ListView) findViewById(R.id.listView1);
-		listViewElements = new ArrayList<String>();
+		listViewElements = new ArrayList<HashMap<String, String>>();
 		AsyncTaskParameters<Hosts> atp = new AsyncTaskParameters<Hosts>();
 		atp.setActivity(BrickAddActivity.this);
 		atp.setContext(getApplicationContext());
