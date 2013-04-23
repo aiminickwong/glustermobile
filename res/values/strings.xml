@@ -24,12 +24,12 @@
     <string name="title_activity_volume_hosts">Volumes And Hosts</string>
     <string name="title_activity_hosts_display">Hosts</string>
     <string name="title_activity_brick_option_display">Bricks And Options</string>
-    <string name="title_activity_login_main">LoginMainActivity</string>
+    <string name="title_activity_login_main">Login</string>
     <string name="SignIn">Sign In</string>
     <string name="UserName">User Name</string>
     <string name="Password">Password</string>
     <string name="HostName">Host Name</string>
-    <string name="title_activity_volume_properties">VolumePropertiesActivity</string>
+    <string name="title_activity_volume_properties">VolumeProperties</string>
     <string name="title_activity_host_properties">HostPropertiesActivity</string>
     <string name="title_activity_brick_property">BrickPropertyActivity</string>
     <string name="title_activity_start_volume">StartVolumeActivity</string>
@@ -65,5 +65,7 @@
     <string name="ApplicationSettings">Application Settings</string>
     <string name="Next">Next</string>
     <string name="SMB">SMB(CIFS)</string>
+    <string name="title_activity_splash">WELCOME</string>
+    <string name="redHat"> REDHAT</string>
 
 </resources>
