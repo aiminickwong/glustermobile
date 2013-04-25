@@ -23,4 +23,7 @@ public class GlusterActivity<G extends GlusterEntity> extends Activity {
 
 	}
 
+	public void after_create() {
+
+	}
 }

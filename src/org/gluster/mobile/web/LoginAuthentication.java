@@ -30,10 +30,15 @@ public class LoginAuthentication extends
 		System.out.println("password is:\t" + password);
 		String host = detailsFromUI.getHost(detailsFromUI);
 		// int choice = detailsFromUI.getChoice(detailsFromUI);
-
+		String hostCred = host;
 		ConnectionUtil connUtil = ConnectionUtil.getInstance();
 		connUtil.clear();
-		connUtil.initClient(host, userName, password);
+		String[] hostID = hostCred.split(":");
+		if (hostID[1].equals("") || hostID[1].equals(null)) {
+			hostID[1] = "80";
+		}
+		connUtil.initClient(hostID[0], userName, password,
+				Integer.parseInt(hostID[1]));
 
 		HttpGet request = new HttpGet(urlString);
 		HttpResponse result;

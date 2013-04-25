@@ -1,7 +1,9 @@
 package org.gluster.mobile.activities;
 
+import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.SetAlertBox;
 import org.gluster.mobile.params.ParametersToHttpPageGetter;
+import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.LoginAuthentication;
 
 import android.app.Activity;
@@ -12,12 +14,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoginMainActivity extends Activity {
+public class LoginMainActivity extends GlusterActivity {
 	private EditText userName;
 	private EditText password;
 	private EditText hostname;
@@ -48,7 +51,8 @@ public class LoginMainActivity extends Activity {
 				if (error.length() > 1) {
 					new SetAlertBox(error
 							+ "Click Ok to get back to Login screen",
-							LoginMainActivity.this, 2).showDialog();
+							LoginMainActivity.this, 2, LoginMainActivity.this)
+							.showDialog();
 
 				} else {
 					try {
@@ -86,11 +90,12 @@ public class LoginMainActivity extends Activity {
 	public void afterLoginPageChange(int id) {
 		Bundle nextPageParams = new Bundle();
 		nextPageParams.putString("url", sHostName);
-		SharedPreferences.Editor prefEditor = loginCred.edit();
-		prefEditor.putString("url", sHostName);
-		prefEditor.putString("password", sPassword);
-		prefEditor.putString("userName", sUser);
-		prefEditor.commit();
+		/*
+		 * SharedPreferences.Editor prefEditor = loginCred.edit();
+		 * prefEditor.putString("url", sHostName);
+		 * prefEditor.putString("password", sPassword);
+		 * prefEditor.putString("userName", sUser); prefEditor.commit();
+		 */
 		Intent nextPage = new Intent(LoginMainActivity.this,
 				ClusterDisplayActivity.class);
 		nextPage.putExtras(nextPageParams);
@@ -99,10 +104,8 @@ public class LoginMainActivity extends Activity {
 
 	private void setPage() {
 		System.out.println("\n" + loginCred.getString("userName", null) + "\n"
-				+ loginCred.getString("password", null) + "\n"
 				+ loginCred.getString("url", null) + "\n");
 		userName.setText(loginCred.getString("userName", null));
-		password.setText(loginCred.getString("password", null));
 		hostname.setText(loginCred.getString("url", null));
 	}
 
@@ -162,15 +165,19 @@ public class LoginMainActivity extends Activity {
 		return password.getText().toString();
 	}
 
+	public String getsPortNumber() {
+		String[] hostID = hostname.getText().toString().split(":");
+		return hostID[1];
+	}
+
 	public String getsHostName() {
 		return hostname.getText().toString();
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.a, menu);
-		return true;
-	}
+	/*
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the
+	 * menu; this adds items to the action bar if it is present.
+	 * getMenuInflater().inflate(R.menu.activity_login_main, menu); return true;
+	 * }
+	 */
 
 }

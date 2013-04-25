@@ -1,0 +1,10 @@
+!SESSION 2013-04-25 09:23:14.957 -----------------------------------------------
+eclipse.buildId=v21.0.1-543035
+java.version=1.7.0_19
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product com.android.ide.eclipse.adt.package.product
+
+!ENTRY com.android.ide.eclipse.ddms 4 0 2013-04-25 09:23:44.170
+!MESSAGE DDMS files not found: /home/test/adt-bundle-linux-x86_64/eclipse/platform-tools/adb /home/test/adt-bundle-linux-x86_64/eclipse/tools/hprof-conv /home/test/adt-bundle-linux-x86_64/eclipse/tools/traceview 

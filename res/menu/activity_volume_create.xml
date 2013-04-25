@@ -1,9 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_settings"
+        android:id="@+id/Settings"
+        android:icon="@drawable/settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        android:showAsAction="always"
         android:title="@string/menu_settings"/>
+    <item
+        android:id="@+id/Next"
+        android:icon="@drawable/go_right"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/Next"/>
+    <item
+        android:id="@+id/cancel"
+        android:icon="@drawable/button_cancel"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/Cancel"/>
 
 </menu>

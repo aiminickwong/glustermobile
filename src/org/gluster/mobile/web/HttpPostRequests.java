@@ -5,6 +5,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
 import org.gluster.mobile.activities.ClusterDisplayActivity;
+import org.gluster.mobile.activities.VolumeDisplayActivity;
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.SetAlertBox;
 import org.gluster.mobile.model.AddError;
@@ -28,6 +29,7 @@ public class HttpPostRequests extends
 	protected String doInBackground(AsyncTaskPostParameters... params) {
 		// TODO Auto-generated method stub
 		url = params[0].getUrl();
+		System.out.println("In post request : " + url);
 		requestBody = params[0].getRequestBody();
 		context = params[0].getContext();
 		choice = params[0].getChoice();
@@ -61,7 +63,7 @@ public class HttpPostRequests extends
 						.getResults(AddError.class);
 				error = ae.getDetail();
 				System.out.println(error + "Httppost");
-				new SetAlertBox(error, context, 1).showDialog();
+				new SetAlertBox(error, context, 1, null).showDialog();
 			} else {
 				context.startActivity(new Intent(context,
 						ClusterDisplayActivity.class)
@@ -73,14 +75,12 @@ public class HttpPostRequests extends
 		case 2: {
 			String error = "";
 			if (result.contains("fault")) {
-				StartStopError se = new EntitiesDeSerializer<StartStopError>(result)
-						.getResults(StartStopError.class);
+				StartStopError se = new EntitiesDeSerializer<StartStopError>(
+						result).getResults(StartStopError.class);
 				error = se.getDetail();
-				new SetAlertBox(error, context, 1).showDialog();
+				new SetAlertBox(error, context, 1, null).showDialog();
 			} else {
-				context.startActivity(new Intent(context,
-						ClusterDisplayActivity.class)
-						.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+				activity.after_post("Done");
 			}
 
 			break;

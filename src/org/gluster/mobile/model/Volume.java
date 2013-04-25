@@ -2,6 +2,7 @@ package org.gluster.mobile.model;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 @Root(name = "gluster_volume", strict = false)
@@ -14,6 +15,7 @@ public class Volume implements GlusterEntity {
 	private String volume_type;
 	@Element(name = "options", required = false)
 	private Options o;
+	@Path("status")
 	@Element(name = "state", required = false)
 	private String state;
 

@@ -51,23 +51,6 @@
         android:text="@string/CpuId"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignRight="@+id/textView1"
-        android:text="@string/Cancel" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="54dp"
-        android:text="@string/Ok" />
-
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"

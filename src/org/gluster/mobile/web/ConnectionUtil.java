@@ -15,6 +15,7 @@ public class ConnectionUtil {
 	private static final ConnectionUtil instance = new ConnectionUtil();
 	private AbstractHttpClient client;
 	private static String hostp;
+	private int portId;
 
 	private ConnectionUtil() {
 		client = null;
@@ -24,7 +25,8 @@ public class ConnectionUtil {
 		return instance;
 	}
 
-	public void initClient(String host, String userName, String password) {
+	public void initClient(String host, String userName, String password,
+			int port) {
 		if (client != null) {
 			throw new IllegalStateException("Client is already initialized!");
 		}
@@ -32,8 +34,9 @@ public class ConnectionUtil {
 		client = new DefaultHttpClient();
 		UsernamePasswordCredentials cred = new UsernamePasswordCredentials(
 				userName, password);
-		client.getCredentialsProvider().setCredentials(new AuthScope(host, 80),
-				cred);
+		portId = port;
+		client.getCredentialsProvider().setCredentials(
+				new AuthScope(host, port), cred);
 	}
 
 	public void clear() {
@@ -72,7 +75,6 @@ public class ConnectionUtil {
 		try {
 			StringEntity se = new StringEntity(requestBody, HTTP.UTF_8);
 			se.setContentType("application/xml");
-			((HttpResponse) request).setEntity(se);
 			return client.execute(request);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -81,10 +83,10 @@ public class ConnectionUtil {
 	}
 
 	public String getHost() {
-		return hostp;
+		return this.hostp + ":" + portId;
 	}
 
 	public void setHost(String host) {
-		hostp = host;
+		this.hostp = host;
 	}
 }

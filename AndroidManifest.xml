@@ -50,11 +50,6 @@
         <activity
             android:name="org.gluster.mobile.activities.LoginMainActivity"
             android:label="@string/title_activity_login_main" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="org.gluster.mobile.activities.VolumePropertiesActivity"
@@ -87,6 +82,19 @@
         <activity
             android:name="org.gluster.mobile.activities.BrickAddActivity"
             android:label="@string/title_activity_brick_add" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="org.gluster.mobile.activities.SplashActivity"
+            android:label="@string/title_activity_splash" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

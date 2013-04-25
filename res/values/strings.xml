@@ -24,17 +24,17 @@
     <string name="title_activity_volume_hosts">Volumes And Hosts</string>
     <string name="title_activity_hosts_display">Hosts</string>
     <string name="title_activity_brick_option_display">Bricks And Options</string>
-    <string name="title_activity_login_main">LoginMainActivity</string>
+    <string name="title_activity_login_main">Login</string>
     <string name="SignIn">Sign In</string>
     <string name="UserName">User Name</string>
     <string name="Password">Password</string>
     <string name="HostName">Host Name</string>
-    <string name="title_activity_volume_properties">VolumePropertiesActivity</string>
+    <string name="title_activity_volume_properties">VolumeProperties</string>
     <string name="title_activity_host_properties">HostPropertiesActivity</string>
     <string name="title_activity_brick_property">BrickPropertyActivity</string>
     <string name="title_activity_start_volume">StartVolumeActivity</string>
     <string name="title_activity_volume_start_stop">VolumeStartStopActivity</string>
-    <string name="title_activity_cluster_add">ClusterAddActivity</string>
+    <string name="title_activity_cluster_add">Create Cluster</string>
     <string name="EnterClusterDetails">Enter Cluster Details</string>
     <string name="DataCenter">Data Center</string>
     <string name="Name">Name</string>
@@ -59,5 +59,13 @@
     <string name="NFS">NFS</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_brick_add">BrickAddActivity</string>
+    <string name="AllowAccessFrom">Allow Access From</string>
+    <string name="ClusterAccessPermissionsHint">(Comma separated list of IP addresses/hostnames)</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="ApplicationSettings">Application Settings</string>
+    <string name="Next">Next</string>
+    <string name="SMB">SMB(CIFS)</string>
+    <string name="title_activity_splash">WELCOME</string>
+    <string name="redHat"> REDHAT</string>
 
 </resources>

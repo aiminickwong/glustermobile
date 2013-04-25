@@ -2,24 +2,28 @@ package org.gluster.mobile.model;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 @Root
 public class Host implements GlusterEntity {
-	@Attribute(name = "id", required = true)
+	@Attribute(name = "id", required = false)
 	private String id;
 
-	@Element(name = "name", required = true)
+	@Element(name = "name", required = false)
 	private String name;
-	@Element(name = "address", required = true)
+	@Element(name = "address", required = false)
 	private String address;
+	@Path("status")
+	@Element(name = "state")
+	private String state;
 	@Element(name = "cluster", required = false)
 	Cluster c = new Cluster();
-	@Element(name = "port", required = true)
+	@Element(name = "port", required = false)
 	private String port;
-	@Element(name = "type", required = true)
+	@Element(name = "type", required = false)
 	private String type;
-	@Element(name = "memory", required = true)
+	@Element(name = "memory", required = false)
 	private long memory;
 
 	public String getPort() {
@@ -86,5 +90,13 @@ public class Host implements GlusterEntity {
 
 	public void setC(Cluster c) {
 		this.c = c;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }
