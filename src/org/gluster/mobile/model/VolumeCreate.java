@@ -17,9 +17,8 @@ public class VolumeCreate implements GlusterEntity {
 	private int stripe_count;
 	@Element(name = "volume_type", required = false)
 	private String volume_type;
-	@Path("bricks")
-	@ElementList(name = "bricks", required = false, inline = true)
-	ArrayList<Brick> bricks = new ArrayList<Brick>();
+	@Element(name = "bricks", required = false)
+	Bricks bricks = new Bricks();
 	@Element(name = "options", required = false)
 	Options optionList = new Options();
 
@@ -39,11 +38,11 @@ public class VolumeCreate implements GlusterEntity {
 		this.volume_type = volume_type;
 	}
 
-	public ArrayList<Brick> getBricks() {
+	public Bricks getBricks() {
 		return bricks;
 	}
 
-	public void setBricks(ArrayList<Brick> bricks) {
+	public void setBricks(Bricks bricks) {
 		this.bricks = bricks;
 	}
 

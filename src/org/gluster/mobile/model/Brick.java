@@ -9,7 +9,7 @@ import org.simpleframework.xml.Root;
 public class Brick implements GlusterEntity {
 	@Attribute(name = "id", required = false)
 	private String id;
-	@Element(name = "name")
+	@Element(name = "name", required = false)
 	public String brickName;
 	@Element(name = "server_id")
 	public String server_id;

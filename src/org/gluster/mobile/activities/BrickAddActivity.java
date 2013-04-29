@@ -160,7 +160,9 @@ public class BrickAddActivity extends GlusterActivity<Host> {
 		newVolume = new VolumeCreate();
 
 		newVolume = getResultObject(paramPage);
-		newVolume.setBricks(bricks);
+		b = new Bricks();
+		b.setBricks(bricks);
+		newVolume.setBricks(b);
 
 		AsyncTaskPostParameters params = new AsyncTaskPostParameters();
 		params.setActivity(BrickAddActivity.this);

@@ -6,7 +6,7 @@ import java.util.List;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-@Root(name = "xml")
+@Root(name = "bricks")
 public class Bricks implements GlusterEntities {
 	@ElementList(name = "brick", required = false, inline = true)
 	List<Brick> bricks = new ArrayList<Brick>();
