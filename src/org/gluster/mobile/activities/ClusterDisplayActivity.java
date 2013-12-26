@@ -6,17 +6,16 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
-import org.gluster.mobile.gdisplays.SetAlertBox;
+import org.gluster.mobile.gdisplays.ShowAlert;
 import org.gluster.mobile.model.AddError;
 import org.gluster.mobile.model.Cluster;
 import org.gluster.mobile.model.Clusters;
-import org.gluster.mobile.params.AsyncTaskParameters;
-import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
-import org.gluster.mobile.web.HttpDeleteRequests;
-import org.gluster.mobile.web.HttpPageGetter;
-import org.gluster.mobile.xml.EntitiesDeSerializer;
+import org.gluster.mobile.web.GlusterHttpDeleteApi;
+import org.gluster.mobile.web.GlusterHttpGetApi;
+import org.gluster.mobile.xml.XmlDeSerializer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,10 +37,8 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 	private String url;
 	private PopupMenu p;
 	private List<HashMap<String, String>> listViewParams;
-	private int[] column_ids = { R.id.glusterElement, R.id.elementProperty1,
-			R.id.elementProperty2 };
-	private String[] column_tags = { "Cluster Name", "Gluster Service",
-			"Virt Service" };
+	private int[] column_ids = { R.id.glusterElement, R.id.elementProperty1, R.id.elementProperty2 };
+	private String[] column_tags = { "Cluster Name", "Gluster Service", "Virt Service" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +50,11 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, final long positionOfClick) {
-				// TODO Auto-generated method stub
 				setPopUp();
 				p.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						// TODO Auto-generated method stub
-
 						switch (item.getItemId()) {
 						case 0: {
 							onPropertiesSelected((int) positionOfClick);
@@ -82,7 +76,6 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long positionOfClick) {
-				// TODO Auto-generated method stub
 				goToNextPage((int) positionOfClick);
 			}
 		});
@@ -91,37 +84,34 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 	public void init() {
 		lists = (ListView) findViewById(R.id.listView1);
 		url = ConnectionUtil.getInstance().getHost();
-		AsyncTaskParameters<Clusters> atp = new AsyncTaskParameters<Clusters>();
-		atp.setClassNames(Clusters.class);
-		atp.setChoice(2);
-		atp.setUrl("http://" + url + "/api/clusters/");
-		atp.setActivity(ClusterDisplayActivity.this);
-		atp.setHost(ConnectionUtil.getInstance().getHost());
-		atp.setContext(ClusterDisplayActivity.this);
-		activity = this;
-		new HttpPageGetter<Clusters, Cluster>().execute(atp);
+        requestData();
 	}
 
-	public void goToNextPage(int positionOfClick) {
+    private void requestData() {
+        AsyncTaskParameter<Clusters> atp = new AsyncTaskParameter<Clusters>(ClusterDisplayActivity.this, "http://" + url + "/api/clusters/", Clusters.class);
+        atp.setIntentActivity(ClusterDisplayActivity.class);
+        atp.setActivity(this);
+        activity = this;
+        new GlusterHttpGetApi<Clusters>().execute(atp);
+    }
+
+    private void requestDataTemp() {
+        AsyncTaskParameter asyncTaskParameter = new AsyncTaskParameter(ClusterDisplayActivity.this, "http://" + url + "/api/clusters/", Clusters.class);
+        asyncTaskParameter.setActivity(ClusterDisplayActivity.this);
+        activity = this;
+        new GlusterHttpGetApi<Clusters>().execute(asyncTaskParameter);
+    }
+    public void goToNextPage(int positionOfClick) {
 		Bundle p = new Bundle();
-		System.out.println("In list click function url is : " + url);
 		p.putString("url", "http://" + url + "/api/clusters/");
 		p.putString("host", ConnectionUtil.getInstance().getHost());
-		System.out.println("In list click function clusterName is : "
-				+ clusterList.get((int) positionOfClick).getName());
-		p.putString("clusterName", clusterList.get((int) positionOfClick)
-				.getName());
-		System.out.println("In list click function clusterName is : "
-				+ clusterList.get((int) positionOfClick).getId());
+		p.putString("clusterName", clusterList.get((int) positionOfClick).getName());
 		p.putString("id", clusterList.get((int) positionOfClick).getId());
-		getApplicationContext().startActivity(
-				new Intent(getApplicationContext(), VolumeHostsActivity.class)
-						.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(p));
+		getApplicationContext().startActivity(new Intent(getApplicationContext(), VolumeHostsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(p));
 	}
 
 	public void createCluster() {
-		Intent nextPage = new Intent(ClusterDisplayActivity.this,
-				ClusterAddActivity.class);
+		Intent nextPage = new Intent(ClusterDisplayActivity.this, ClusterAddActivity.class);
 		startActivity(nextPage);
 	}
 
@@ -133,27 +123,17 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 	}
 
 	public void onDeleteSelected(int positionOfClick) {
-		AsyncTaskPostParameters params = new AsyncTaskPostParameters();
-		params.setContext(getApplicationContext());
+		AsyncTaskParameter params = new AsyncTaskParameter(ClusterDisplayActivity.this, "http://" + url + "/api/clusters/" + clusterList.get((int) positionOfClick).getId(), null);
 		params.setRequestBody("<async>false</async>");
-		params.setActivity(activity);
-		params.setUrl("http://" + url + "/api/clusters/"
-				+ clusterList.get((int) positionOfClick).getId());
-		new HttpDeleteRequests().execute(params);
-		System.out.println("Delete");
-		// activity.after_delete("refresh");
+		params.setActivity(ClusterDisplayActivity.this);
+		new GlusterHttpDeleteApi().execute(params);
 	}
 
 	public void onPropertiesSelected(int positionOfClick) {
 		Bundle nPParams = new Bundle();
-		nPParams.putString("url", "http://" + url + "/api/clusters/"
-				+ clusterList.get(positionOfClick).getId());
-		nPParams.putString("title",
-				"Cluster : " + clusterList.get((int) positionOfClick).getName());
-		System.out.println("In setListView url is : " + url
-				+ clusterList.get((int) positionOfClick).getId());
-		Intent nextPage = new Intent(ClusterDisplayActivity.this,
-				ClusterPropertiesActivity.class);
+		nPParams.putString("url", "http://" + url + "/api/clusters/" + clusterList.get(positionOfClick).getId());
+		nPParams.putString("title", "Cluster : " + clusterList.get((int) positionOfClick).getName());
+		Intent nextPage = new Intent(ClusterDisplayActivity.this, ClusterPropertiesActivity.class);
 		nextPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(nPParams);
 		getApplicationContext().startActivity(nextPage);
 	}
@@ -161,8 +141,7 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 	@Override
 	public void after_get(List<Cluster> objectList) {
 		clusterList = objectList;
-		new ListDisplay(lists, this, setListViewParams(), column_ids,
-				column_tags).display();
+		new ListDisplay(lists, this, setListViewParams(), column_ids, column_tags).display();
 	}
 
 	private List<HashMap<String, String>> setListViewParams() {
@@ -189,21 +168,18 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 	public void after_delete(String message) {
 		String error;
 		if (message.contains("fault")) {
-			AddError ae = new EntitiesDeSerializer<AddError>(message)
-					.getResults(AddError.class);
+			AddError ae = new XmlDeSerializer<AddError>(message).deSerialize(AddError.class);
 			error = ae.getDetail();
 			System.out.println(error);
 		} else {
 			error = "Successful";
 		}
-		new SetAlertBox(error, ClusterDisplayActivity.this, 3,
-				ClusterDisplayActivity.this).showDialog();
+        new ShowAlert(error, ClusterDisplayActivity.this,ClusterDisplayActivity.class).showAlert();
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-
 		case R.id.create:
 			createCluster();
 			break;
@@ -216,9 +192,7 @@ public class ClusterDisplayActivity extends GlusterActivity<Cluster> {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_cluster_display, menu);
 		return true;
 	}
-
 }

@@ -7,19 +7,17 @@ import java.util.List;
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
 import org.gluster.mobile.gdisplays.SetAlertBox;
+import org.gluster.mobile.gdisplays.ShowAlert;
+import org.gluster.mobile.model.StartStopError;
 import org.gluster.mobile.model.Volume;
 import org.gluster.mobile.model.Volumes;
-import org.gluster.mobile.params.AsyncTaskParameters;
-import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
-import org.gluster.mobile.web.HttpPageGetter;
-import org.gluster.mobile.web.HttpPostRequests;
+import org.gluster.mobile.web.GlusterHttpGetApi;
+import org.gluster.mobile.web.GlusterHttpPostApi;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,13 +39,11 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 	private List<Volume> volumeList;
 	private PopupMenu p;
 	private List<HashMap<String, String>> listViewParams;
-	private int[] volume_ids = { R.id.glusterElement, R.id.elementProperty1,
-			R.id.elementProperty2 };
+	private int[] volume_ids = { R.id.glusterElement, R.id.elementProperty1, R.id.elementProperty2 };
 	private String[] column_tags = { "Name", "Type", "State" };
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.layout.activity_volume_hosts, menu);
 		return true;
@@ -62,34 +58,20 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 		url = getIntent().getExtras().getString("url") + "/glustervolumes/";
 		System.out.println("Context is : " + VolumeDisplayActivity.this
 				+ "In volumeDisplayActivity");
-		AsyncTaskParameters<Volumes> params = new AsyncTaskParameters<Volumes>();
-		params.setClassNames(Volumes.class);
-		params.setChoice(2);
-		params.setUrl(url);
+		AsyncTaskParameter<Volumes> params = new AsyncTaskParameter<Volumes>(VolumeDisplayActivity.this, url, Volumes.class);
 		params.setActivity(VolumeDisplayActivity.this);
-		params.setContext(this);
-		params.setHost(ConnectionUtil.getInstance().getHost());
-		// p.setContext(this);
-		// p.setDisplay(lists);
-		// p.setListOrText(true);
-		System.out.println("in volume display activity");
-		new HttpPageGetter<Volumes, Volume>().execute(params);
+        new GlusterHttpGetApi<Volumes>().execute(params);
+
 		lists.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, final long positionOfClick) {
-				// TODO Auto-generated method stub
 				setPopUp((int) positionOfClick);
 				p.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						// TODO Auto-generated method stub
-
-						System.out.println("In option menu you clicked on : "
-								+ item.getItemId());
-
 						switch (item.getOrder()) {
 						case 0: {
 							onPropertiesSelected((int) positionOfClick);
@@ -124,62 +106,37 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 
 	public void goToNextPage(int positionOfClick) {
 		Bundle p = new Bundle();
-		System.out.println("In list click function url is : " + url
-				+ volumeList.get((int) positionOfClick).getId());
 		p.putString("url", url + volumeList.get((int) positionOfClick).getId());
-		System.out.println("In list click function volumeName is : "
-				+ volumeList.get((int) positionOfClick).getName());
-		p.putString("volumeName", volumeList.get((int) positionOfClick)
-				.getName() + "of Cluster : " + name);
-		String[] options = new String[volumeList.get((int) positionOfClick)
-				.getO().getOptions().size()];
-		for (int i = 0; i < volumeList.get((int) positionOfClick).getO()
-				.getOptions().size(); i++) {
-			options[i] = volumeList.get((int) positionOfClick).getO()
-					.getOptions().get(i).getName()
-					+ " = "
-					+ volumeList.get((int) positionOfClick).getO().getOptions()
-							.get(i).getValue();
+		p.putString("volumeName", volumeList.get((int) positionOfClick).getName() + "of Cluster : " + name);
+		String[] options = new String[volumeList.get((int) positionOfClick).getO().getOptions().size()];
+		for (int i = 0; i < volumeList.get((int) positionOfClick).getO().getOptions().size(); i++) {
+			options[i] = volumeList.get((int) positionOfClick).getO().getOptions().get(i).getName() + " = " + volumeList.get((int) positionOfClick).getO().getOptions().get(i).getValue();
 		}
 		p.putStringArray("options", options);
-		getApplicationContext().startActivity(
-				new Intent(getApplicationContext(), BrickOptionActivity.class)
-						.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(p));
+		getApplicationContext().startActivity(new Intent(getApplicationContext(), BrickOptionActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(p));
 	}
 
 	public void onStopVolumeSelected(int positionOfClick) {
 		String requestBody = "<action/>";
-		AsyncTaskPostParameters params = new AsyncTaskPostParameters();
-		params.setActivity(this);
-		params.setContext(VolumeDisplayActivity.this);
-		params.setRequestBody(requestBody);
-		params.setChoice(2);
-		params.setUrl(url + volumeList.get((int) positionOfClick).getId()
-				+ "/stop");
-		new HttpPostRequests().execute(params);
+        AsyncTaskParameter<StartStopError> asyncTaskParameter = new AsyncTaskParameter<StartStopError>(VolumeDisplayActivity.this, url + volumeList.get((int) positionOfClick).getId() + "/stop", StartStopError.class);
+		asyncTaskParameter.setActivity(VolumeDisplayActivity.this);
+		asyncTaskParameter.setRequestBody(requestBody);
+        new GlusterHttpPostApi<StartStopError>().execute(asyncTaskParameter);
 	}
 
 	public void onStartVolumeSelected(int positionOfClick) {
 		String requestBody = "<action/>";
-		AsyncTaskPostParameters params = new AsyncTaskPostParameters();
-		params.setContext(VolumeDisplayActivity.this);
-		params.setChoice(2);
-		params.setActivity(this);
-		params.setRequestBody(requestBody);
-		params.setUrl(url + volumeList.get((int) positionOfClick).getId()
-				+ "/start");
-		new HttpPostRequests().execute(params);
-
+        AsyncTaskParameter<StartStopError> asyncTaskParameter = new AsyncTaskParameter<StartStopError>(VolumeDisplayActivity.this, url + volumeList.get((int) positionOfClick).getId() + "/start", StartStopError.class);
+		asyncTaskParameter.setActivity(VolumeDisplayActivity.this);
+        asyncTaskParameter.setRequestBody(requestBody);
+        new GlusterHttpPostApi<StartStopError>().execute(asyncTaskParameter);
 	}
 
 	public void onPropertiesSelected(int positionOfClick) {
 		Bundle nPParams = new Bundle();
-		nPParams.putString("url", url
-				+ volumeList.get((int) positionOfClick).getId());
-		nPParams.putString("title",
-				"Volume : " + volumeList.get((int) positionOfClick).getName());
-		Intent nextPage = new Intent(getApplicationContext(),
-				VolumePropertiesActivity.class);
+		nPParams.putString("url", url + volumeList.get((int) positionOfClick).getId());
+		nPParams.putString("title", "Volume : " + volumeList.get((int) positionOfClick).getName());
+		Intent nextPage = new Intent(getApplicationContext(), VolumePropertiesActivity.class);
 		nextPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(nPParams);
 		getApplicationContext().startActivity(nextPage);
 	}
@@ -197,10 +154,8 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 	}
 
 	public void after_get(List<Volume> objectList) {
-		System.out.println(objectList.size());
 		volumeList = objectList;
-		new ListDisplay(lists, this, setListViewParams(), volume_ids,
-				column_tags).display();
+		new ListDisplay(lists, this, setListViewParams(), volume_ids, column_tags).display();
 	}
 
 	private List<HashMap<String, String>> setListViewParams() {
@@ -216,43 +171,21 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 	}
 
 	public void setStartStopAlert(String result, Context context) {
-		System.out.println("In listView after requesting ");
-		System.out.println("Context is : " + context);
 		String toDisplay;
-		System.out.println(result + "In setlistview");
 		if (result.contains("complete")) {
 			toDisplay = "Request executed Successfully";
 		} else {
 			toDisplay = "Request Failed";
 		}
-        /*
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-				context);
-		alertDialogBuilder.setTitle("Post Request Status")
-				.setMessage(toDisplay)
-				.setPositiveButton("Ok", new OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						dialog.cancel();
-					}
-				});
-		AlertDialog alertDialog = alertDialogBuilder.create();
-		alertDialog.show();
-        */
-        new SetAlertBox(toDisplay,context,2,VolumeDisplayActivity.this);
+        new ShowAlert(toDisplay, VolumeDisplayActivity.this,VolumeDisplayActivity.class).showAlert();
 	}
 
 	public void createVolume() {
-		// TODO Auto-generated method stub
-		Intent nextPage = new Intent(VolumeDisplayActivity.this,
-				VolumeCreateActivity.class);
+		Intent nextPage = new Intent(VolumeDisplayActivity.this, VolumeCreateActivity.class);
 		Bundle nPParams = new Bundle();
 		nPParams.putString("url", url);
 		nPParams.putString("name", name);
-		nPParams.putString("clusterHostUrl",
-				getIntent().getExtras().getString("clusterHostUrl"));
+		nPParams.putString("clusterHostUrl", getIntent().getExtras().getString("clusterHostUrl"));
 		nextPage.putExtras(nPParams);
 		startActivity(nextPage);
 	}
@@ -260,14 +193,9 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 	@Override
 	public void after_post(String message) {
 		if (message.equalsIgnoreCase("Done")) {
-			AsyncTaskParameters<Volumes> params = new AsyncTaskParameters<Volumes>();
-			params.setClassNames(Volumes.class);
-			params.setChoice(2);
-			params.setUrl(url);
-			params.setActivity(VolumeDisplayActivity.this);
-			params.setContext(this);
-			params.setHost(ConnectionUtil.getInstance().getHost());
-			new HttpPageGetter<Volumes, Volume>().execute(params);
+            AsyncTaskParameter<Volumes> asyncTaskParameter = new AsyncTaskParameter<Volumes>(VolumeDisplayActivity.this, url, Volumes.class);
+			asyncTaskParameter.setActivity(VolumeDisplayActivity.this);
+			new GlusterHttpGetApi<Volumes>().execute(asyncTaskParameter);
 		}
 	}
 
@@ -281,7 +209,7 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 			createVolume();
 			break;
 		default:
-			System.out.println("CLicked!!!!!!");
+            break;
 		}
 		return true;
 

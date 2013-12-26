@@ -44,7 +44,6 @@ public class SetTextView<G extends GlusterEntity> {
 				propsDisplay.setText(propsDisplay.getText() + "\n"
 						+ "Virt service not enabled");
 			}
-			// propsDisplay.setText("Abracadabra");
 			break;
 		case 6:
 			ArrayList<Host> hostList = new ArrayList<Host>(
@@ -61,7 +60,6 @@ public class SetTextView<G extends GlusterEntity> {
 					+ "Port : " + hostList.get(0).getPort() + "\n" + "Type : "
 					+ hostList.get(0).getType());
 
-			// propsDisplay.setText("Abracadabra");
 			break;
 
 		case 7:

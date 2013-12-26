@@ -44,31 +44,20 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 				.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 					@Override
-					public void onItemSelected(AdapterView<?> arg0,
-							View itemSelected, int position, long arg3) {
-						// TODO Auto-generated method stub
-						System.out.println("You selected : "
-								+ itemSelected.toString());
-						System.out.println("You have selected : " + position);
+					public void onItemSelected(AdapterView<?> arg0, View itemSelected, int position, long arg3) {
 						if (position > 0) {
-							AlertDialog.Builder alert = new AlertDialog.Builder(
-									VolumeCreateActivity.this);
-
+							AlertDialog.Builder alert = new AlertDialog.Builder(VolumeCreateActivity.this);
 							alert.setTitle("Title");
 							alert.setMessage("Enter Count");
 
-							// Set an EditText view to get user input
-							final EditText input = new EditText(
-									VolumeCreateActivity.this);
+							final EditText input = new EditText(VolumeCreateActivity.this);
 							alert.setView(input);
 
-							alert.setPositiveButton("Ok",
-									new DialogInterface.OnClickListener() {
+							alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog,
 												int whichButton) {
-											count = Integer.parseInt(input
-													.getText().toString());
+											count = Integer.parseInt(input.getText().toString());
 										}
 									});
 
@@ -88,17 +77,12 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 
 					@Override
 					public void onNothingSelected(AdapterView<?> arg0) {
-						// TODO Auto-generated method stub
-
 					}
 				});
-
 	}
 
 	@Override
 	public void after_post(String message) {
-		new SetAlertBox(message, VolumeCreateActivity.this, 4,
-				VolumeCreateActivity.this).showDialog();
 	}
 
 	private void init() {
@@ -112,15 +96,10 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 		gluster.setClickable(false);
 		nfs = (CheckBox) findViewById(R.id.checkBox2);
 		smb = (CheckBox) findViewById(R.id.checkBox3);
-		System.out.println("In Volumecreate" + name);
-		String[] volumeTypes = { "DISTRIBUTE", "REPLICATE",
-				"DISTRIBUTED REPLICATE", "STRIPE", "DISTRIBUTED STRIPE" };
+		String[] volumeTypes = { "DISTRIBUTE", "REPLICATE", "DISTRIBUTED REPLICATE", "STRIPE", "DISTRIBUTED STRIPE" };
 		volume_type = (Spinner) findViewById(R.id.spinner2);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				VolumeCreateActivity.this,
-				android.R.layout.simple_spinner_dropdown_item, volumeTypes);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(VolumeCreateActivity.this, android.R.layout.simple_spinner_dropdown_item, volumeTypes);
 		volume_type.setAdapter(adapter);
-
 	}
 
 	@Override
@@ -207,14 +186,11 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 			newVolume.setStripe_count(count);
 		}
 		count = 0;
-		String page = new EntitySerializer().deSerialize(newVolume,
-				"VolumeCreate.class");
+		String page = new EntitySerializer().deSerialize(newVolume, "VolumeCreate.class");
 		nextPageParams.putString("url", url);
 		nextPageParams.putString("page", page);
-		nextPageParams.putString("clusterHostUrl", getIntent().getExtras()
-				.getString("clusterHostUrl"));
-		Intent nextPage = new Intent(VolumeCreateActivity.this,
-				BrickAddActivity.class);
+		nextPageParams.putString("clusterHostUrl", getIntent().getExtras().getString("clusterHostUrl"));
+		Intent nextPage = new Intent(VolumeCreateActivity.this, BrickAddActivity.class);
 		nextPage.putExtras(nextPageParams);
 		startActivity(nextPage);
 

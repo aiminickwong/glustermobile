@@ -8,9 +8,9 @@ import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
 import org.gluster.mobile.model.Brick;
 import org.gluster.mobile.model.Bricks;
-import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
-import org.gluster.mobile.web.HttpPageGetter;
+import org.gluster.mobile.web.GlusterHttpGetApi;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,13 +43,11 @@ public class BrickDisplayActivity extends GlusterActivity<Brick> {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, final long positionOfClick) {
-				// TODO Auto-generated method stub
 				setPopUp();
 				p.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
-						// TODO Auto-generated method stub
 						switch (item.getItemId()) {
 						case 0:
 							onPropertiesSelected((int) positionOfClick);
@@ -72,33 +70,19 @@ public class BrickDisplayActivity extends GlusterActivity<Brick> {
 
 	private void onPropertiesSelected(int positionOfClick) {
 		Bundle nPParams = new Bundle();
-		System.out.println("In setlistview host properties url is : " + url
-				+ "/" + brickList.get((int) positionOfClick).getId());
-		nPParams.putString("url",
-				url + "/" + brickList.get((int) positionOfClick).getId());
-		nPParams.putString("title", brickList.get((int) positionOfClick)
-				.getName());
-		Intent nextPage = new Intent(getApplicationContext(),
-				BrickPropertyActivity.class);
+		nPParams.putString("url", url + "/" + brickList.get((int) positionOfClick).getId());
+		nPParams.putString("title", brickList.get((int) positionOfClick).getName());
+		Intent nextPage = new Intent(getApplicationContext(), BrickPropertyActivity.class);
 		nextPage.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtras(nPParams);
 		getApplicationContext().startActivity(nextPage);
 	}
 
 	private void init() {
-		url = getIntent().getExtras().getString("url") + "/bricks";
-		System.out
-				.println(url
-						+ "in brickDisplayActivity onCreate()"
-						+ "\n"
-						+ "it is supposed to be : http://10.70.1.136/api/clusters/d0d8b6f8-8001-11e2-81ba-14feb5be1dfc/glustervolumes/5dc92482-c945-4b19-ad5e-78223d1ede41/bricks");
 		lists = (ListView) findViewById(R.id.listView1);
-		AsyncTaskParameters<Bricks> atp = new AsyncTaskParameters<Bricks>();
-		atp.setClassNames(Bricks.class);
-		atp.setChoice(2);
-		atp.setContext(getApplicationContext());
-		atp.setActivity(BrickDisplayActivity.this);
-		atp.setUrl(url);
-		new HttpPageGetter<Bricks, Brick>().execute(atp);
+        AsyncTaskParameter asyncTaskParameter = new AsyncTaskParameter(BrickDisplayActivity.this, getIntent().getExtras().getString("url") + "/bricks", Bricks.class);
+        asyncTaskParameter.setActivity(BrickDisplayActivity.this);
+        url = getIntent().getExtras().getString("url") + "/bricks";
+		new GlusterHttpGetApi<Bricks>().execute(asyncTaskParameter);
 	}
 
 	private List<HashMap<String, String>> setListViewParams() {
@@ -115,8 +99,7 @@ public class BrickDisplayActivity extends GlusterActivity<Brick> {
 	@Override
 	public void after_get(List<Brick> objectList) {
 		brickList = objectList;
-		new ListDisplay(lists, this, setListViewParams(), brick_ids,
-				column_tags).display();
+		new ListDisplay(lists, this, setListViewParams(), brick_ids,column_tags).display();
 	}
 
 	@Override
@@ -131,7 +114,6 @@ public class BrickDisplayActivity extends GlusterActivity<Brick> {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_brick_display, menu);
 		return true;
 	}

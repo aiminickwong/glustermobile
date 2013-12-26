@@ -22,13 +22,12 @@ public class SplashActivity extends Activity {
 				try {
 					while (splashActive && ms < splashTime) {
 						if (!paused)
-							ms = ms + 100;
-						sleep(100);
+						    ms = ms + 100;
+						    sleep(100);
 					}
 				} catch (Exception e) {
 				} finally {
-					Intent intent = new Intent(SplashActivity.this,
-							LoginMainActivity.class);
+					Intent intent = new Intent(SplashActivity.this, LoginMainActivity.class);
 					startActivity(intent);
 				}
 			}
@@ -39,7 +38,6 @@ public class SplashActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_splash, menu);
 		return true;
 	}

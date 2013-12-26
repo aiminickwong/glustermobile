@@ -2,6 +2,7 @@ package org.gluster.mobile.activities;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.SetAlertBox;
+import org.gluster.mobile.gdisplays.ShowAlert;
 import org.gluster.mobile.params.ParametersToHttpPageGetter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.LoginAuthentication;
@@ -44,19 +45,13 @@ public class LoginMainActivity extends GlusterActivity {
 
 				// TODO Auto-generated method stub
 				setEntries();
-                ParametersToHttpPageGetter params = new ParametersToHttpPageGetter(
-						sHostName, sPassword, sUser);
+                ParametersToHttpPageGetter params = new ParametersToHttpPageGetter(sHostName, sPassword, sUser);
 				String error = check_fields();
 				if (error.length() > 1) {
-					new SetAlertBox(error
-							+ "Click Ok to get back to Login screen",
-							LoginMainActivity.this, 2, LoginMainActivity.this)
-							.showDialog();
-
+                    new ShowAlert(error + "Click Ok to get back to Login screen" ,LoginMainActivity.this, LoginMainActivity.class).showAlert();
 				} else {
 					try {
-						new LoginAuthentication(LoginMainActivity.this)
-								.execute(params);
+						new LoginAuthentication(LoginMainActivity.this).execute(params);
 					} catch (Exception e) {
 						setErrorMessage();
 					}

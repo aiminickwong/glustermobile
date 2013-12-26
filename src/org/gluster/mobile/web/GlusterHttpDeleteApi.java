@@ -5,13 +5,12 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.util.EntityUtils;
 import org.gluster.mobile.gactivity.GlusterActivity;
-import org.gluster.mobile.params.AsyncTaskPostParameters;
+import org.gluster.mobile.params.AsyncTaskParameter;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class HttpDeleteRequests extends
-		AsyncTask<AsyncTaskPostParameters, Void, String> {
+public class GlusterHttpDeleteApi extends AsyncTask<AsyncTaskParameter, Void, String> {
 	private String url;
 	private String requestBody;
 	private Context context;
@@ -19,12 +18,10 @@ public class HttpDeleteRequests extends
 	private GlusterActivity activity;
 
 	@Override
-	protected String doInBackground(AsyncTaskPostParameters... params) {
-		// TODO Auto-generated method stub
+	protected String doInBackground(AsyncTaskParameter... params) {
 		url = params[0].getUrl();
 		requestBody = params[0].getRequestBody();
 		context = params[0].getContext();
-		choice = params[0].getChoice();
 		activity = params[0].getActivity();
 		return request(url);
 	}
@@ -39,14 +36,12 @@ public class HttpDeleteRequests extends
 			System.out.println("Outcome of Delete request : " + outcome);
 			return outcome;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			return e.toString();
 		}
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
-		// TODO Auto-generated method stub
 		activity.after_delete(result);
 	}
 

@@ -1,16 +1,13 @@
 package org.gluster.mobile.activities;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.SetTextView;
 import org.gluster.mobile.model.Brick;
-import org.gluster.mobile.model.Bricks;
-import org.gluster.mobile.model.Cluster;
-import org.gluster.mobile.params.AsyncTaskParameters;
+import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
-import org.gluster.mobile.web.HttpPageGetter;
+import org.gluster.mobile.web.GlusterHttpGetApi;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,22 +23,14 @@ public class BrickPropertyActivity extends GlusterActivity<Brick> {
 		setContentView(R.layout.activity_brick_property);
 		setTitle(getIntent().getExtras().getString("title"));
 		propDisplay = (TextView) findViewById(R.id.brickProps);
-		String url = getIntent().getExtras().getString("url");
-		AsyncTaskParameters<Bricks> atp = new AsyncTaskParameters<Bricks>();
-		// atp.setContext(getApplicationContext());
-		atp.setClassName(Brick.class);
-		atp.setUrl(url);
-		atp.setContext(getApplicationContext());
-		atp.setChoice(1);
-		atp.setActivity(BrickPropertyActivity.this);
-		// atp.setListOrText(false);
-		// atp.setPropDisplay(propDisplay);
-		new HttpPageGetter<Bricks, Brick>().execute(atp);
+
+        AsyncTaskParameter asyncTaskParameter = new AsyncTaskParameter(BrickPropertyActivity.this, getIntent().getExtras().getString("url"), Brick.class);
+        asyncTaskParameter.setActivity(BrickPropertyActivity.this);
+        new GlusterHttpGetApi<Brick>().execute(asyncTaskParameter);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_brick_property, menu);
 		return true;
 	}

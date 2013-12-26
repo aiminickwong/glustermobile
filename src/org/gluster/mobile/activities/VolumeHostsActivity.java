@@ -27,29 +27,20 @@ public class VolumeHostsActivity extends TabActivity {
 		String url = getIntent().getExtras().getString("url");
 		String clusterid = getIntent().getExtras().getString("id");
 		TabHost tabHost = getTabHost();
-		if (tabHost.equals(null)) {
-			System.out.println("Null!!");
-		}
 		TabSpec volumes = tabHost.newTabSpec("Volumes");
 		volumes.setIndicator("Volumes");
 		Bundle clusterVolumeUrl = new Bundle();
 		clusterUrl = url + clusterid;
-		System.out.println("In volumehosts activity url is  : " + clusterUrl);
 		clusterVolumeUrl.putString("url", clusterUrl);
 		clusterVolumeUrl.putString("name", title);
 		searchCluster = "cluster=" + title;
 		try {
-			clusterVolumeUrl.putString(
-					"clusterHostUrl",
-					"http://" + ConnectionUtil.getInstance().getHost()
-							+ "/api/hosts/?search="
-							+ URLEncoder.encode(searchCluster, "utf-8"));
+			clusterVolumeUrl.putString("clusterHostUrl", "http://" + ConnectionUtil.getInstance().getHost() + "/api/hosts/?search=" + URLEncoder.encode(searchCluster, "utf-8"));
 		} catch (Exception error) {
-			System.out.println(error.toString());
+			error.printStackTrace();
 		}
 
-		Intent volumesIntent = new Intent(VolumeHostsActivity.this,
-				VolumeDisplayActivity.class);
+		Intent volumesIntent = new Intent(VolumeHostsActivity.this, VolumeDisplayActivity.class);
 		volumesIntent.putExtras(clusterVolumeUrl);
 		volumes.setContent(volumesIntent);
 
@@ -57,11 +48,9 @@ public class VolumeHostsActivity extends TabActivity {
 		hosts.setIndicator("Hosts");
 		Bundle hostClusterId = new Bundle();
 		hostClusterId.putString("clusterid", clusterid);
-		hostClusterId.putString("url", getIntent().getExtras()
-				.getString("host") + "/api/hosts/");
+		hostClusterId.putString("url", getIntent().getExtras().getString("host") + "/api/hosts/");
 		hostClusterId.putString("clusterName", title);
-		Intent hostsIntent = new Intent(VolumeHostsActivity.this,
-				HostsDisplayActivity.class);
+		Intent hostsIntent = new Intent(VolumeHostsActivity.this, HostsDisplayActivity.class);
 		hostsIntent.putExtras(hostClusterId);
 		hosts.setContent(hostsIntent);
 
@@ -71,7 +60,6 @@ public class VolumeHostsActivity extends TabActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_volume_hosts, menu);
 		return true;
 	}
@@ -82,7 +70,7 @@ public class VolumeHostsActivity extends TabActivity {
 			createVolume();
 			break;
 		default:
-			System.out.println("CLicked!!!!!!");
+			break;
 
 		}
 		return true;
@@ -90,26 +78,17 @@ public class VolumeHostsActivity extends TabActivity {
 	}
 
 	private void createVolume() {
-		// TODO Auto-generated method stub
 		try {
-			Intent nextPage = new Intent(VolumeHostsActivity.this,
-					VolumeCreateActivity.class);
+			Intent nextPage = new Intent(VolumeHostsActivity.this, VolumeCreateActivity.class);
 			Bundle nPParams = new Bundle();
 			nPParams.putString("url", clusterUrl + "/glustervolumes/");
 			nPParams.putString("name", title);
-			nPParams.putString(
-					"clusterHostUrl",
-					"http://" + ConnectionUtil.getInstance().getHost()
-							+ "/api/hosts/?search="
-							+ URLEncoder.encode(searchCluster, "utf-8"));
+			nPParams.putString("clusterHostUrl", "http://" + ConnectionUtil.getInstance().getHost() + "/api/hosts/?search=" + URLEncoder.encode(searchCluster, "utf-8"));
 			nextPage.putExtras(nPParams);
 			startActivity(nextPage);
 
 		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.toString());
+            e.printStackTrace();
 		}
-
 	}
-
 }
