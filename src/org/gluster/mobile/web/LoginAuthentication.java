@@ -23,12 +23,9 @@ public class LoginAuthentication extends
 		// TODO Auto-generated method stub
 		ParametersToHttpPageGetter detailsFromUI = params[0];
 		final String urlString = detailsFromUI.getUrl(detailsFromUI);
-		System.out.println("url is \t" + urlString);
-		final String userName = detailsFromUI.getUserName(detailsFromUI);
-		System.out.println("userName is" + userName);
-		final String password = detailsFromUI.getPassword(detailsFromUI);
-		System.out.println("password is:\t" + password);
-		String host = detailsFromUI.getHost(detailsFromUI);
+        final String userName = detailsFromUI.getUserName(detailsFromUI);
+        final String password = detailsFromUI.getPassword(detailsFromUI);
+        String host = detailsFromUI.getHost(detailsFromUI);
 		// int choice = detailsFromUI.getChoice(detailsFromUI);
 		String hostCred = host;
 		ConnectionUtil connUtil = ConnectionUtil.getInstance();
@@ -44,7 +41,7 @@ public class LoginAuthentication extends
 		HttpResponse result;
 		try {
 			result = connUtil.get(request);
-			System.out.println(EntityUtils.toString(result.getEntity()));
+			result.getEntity();
 		} catch (Exception e) {
 			// TODO: handle exception
 			retVal = "fail";
@@ -70,12 +67,10 @@ public class LoginAuthentication extends
 	protected void onPostExecute(Void result) {
 		// TODO Auto-generated method stub
 		if (retVal.equals("pass")) {
-			System.out.println("Iam cool!!!!!!!!!!!");
 			activity.afterLoginPageChange(-1);
 		} else {
 			ConnectionUtil.getInstance().clear();
 			activity.setErrorMessage();
-			System.out.println("Bang emulator!!!");
 			return;
 		}
 		super.onPostExecute(result);

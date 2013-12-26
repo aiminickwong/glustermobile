@@ -62,11 +62,11 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
         android:layout_alignRight="@+id/spinner1"
-        android:layout_alignTop="@+id/editText1"
-        android:background="@drawable/add" />
+        android:background="@drawable/add"
+        android:layout_alignTop="@+id/editText1" />
 
     <ListView
         android:id="@+id/listView1"

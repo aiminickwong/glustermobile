@@ -78,7 +78,7 @@ public class HttpPostRequests extends
 				StartStopError se = new EntitiesDeSerializer<StartStopError>(
 						result).getResults(StartStopError.class);
 				error = se.getDetail();
-				new SetAlertBox(error, context, 1, null).showDialog();
+				new SetAlertBox(error, context, 2, null).showDialog();
 			} else {
 				activity.after_post("Done");
 			}

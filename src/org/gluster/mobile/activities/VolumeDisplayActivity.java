@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
+import org.gluster.mobile.gdisplays.SetAlertBox;
 import org.gluster.mobile.model.Volume;
 import org.gluster.mobile.model.Volumes;
 import org.gluster.mobile.params.AsyncTaskParameters;
@@ -224,6 +225,7 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 		} else {
 			toDisplay = "Request Failed";
 		}
+        /*
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				context);
 		alertDialogBuilder.setTitle("Post Request Status")
@@ -238,7 +240,8 @@ public class VolumeDisplayActivity extends GlusterActivity<Volume> {
 				});
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
-
+        */
+        new SetAlertBox(toDisplay,context,2,VolumeDisplayActivity.this);
 	}
 
 	public void createVolume() {

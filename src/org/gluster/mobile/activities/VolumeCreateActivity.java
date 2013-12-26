@@ -69,9 +69,6 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 												int whichButton) {
 											count = Integer.parseInt(input
 													.getText().toString());
-											// count = 0;
-											// System.out.println(value);
-											// Do something with value!
 										}
 									});
 
@@ -109,9 +106,7 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 		access_permissions = (EditText) findViewById(R.id.editText2);
 		access_permissions.setText("*");
 		url = getIntent().getExtras().getString("url");
-		// cancel = (Button) findViewById(R.id.button1);
 		setNames(getIntent().getExtras().getString("name"));
-		// addBricks = (Button) findViewById(R.id.button2);
 		gluster = (CheckBox) findViewById(R.id.checkBox1);
 		gluster.setChecked(true);
 		gluster.setClickable(false);
@@ -130,7 +125,6 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_volume_create, menu);
 		return true;
 	}
@@ -161,7 +155,6 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 	}
 
 	private void nextAddBricks() {
-		// TODO Auto-generated method stub
 		VolumeCreate newVolume = new VolumeCreate();
 		Option option;
 		Options options = new Options();
@@ -214,10 +207,6 @@ public class VolumeCreateActivity extends GlusterActivity<Host> {
 			newVolume.setStripe_count(count);
 		}
 		count = 0;
-		// setAccessProtocols();
-
-		// newVolume.setAccess_protocols((ArrayList<Access_Protocol>)
-		// ap.getAp());
 		String page = new EntitySerializer().deSerialize(newVolume,
 				"VolumeCreate.class");
 		nextPageParams.putString("url", url);

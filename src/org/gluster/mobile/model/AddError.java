@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
+import org.gluster.mobile.model.GlusterEntity;
 
 @Root(name = "fault")
 public class AddError implements GlusterEntities {

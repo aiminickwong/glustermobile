@@ -2,7 +2,7 @@ package org.gluster.mobile.model;
 
 import java.util.List;
 
-public interface GlusterEntities {
+public interface GlusterEntities extends  GlusterEntity{
 	public List<? extends GlusterEntity> getObjects();
 
 	public void setObjects(List<? extends GlusterEntity> objects);

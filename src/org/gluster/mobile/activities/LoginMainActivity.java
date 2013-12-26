@@ -44,8 +44,7 @@ public class LoginMainActivity extends GlusterActivity {
 
 				// TODO Auto-generated method stub
 				setEntries();
-				System.out.println(sHostName + "\n" + sPassword + "\n" + sUser);
-				ParametersToHttpPageGetter params = new ParametersToHttpPageGetter(
+                ParametersToHttpPageGetter params = new ParametersToHttpPageGetter(
 						sHostName, sPassword, sUser);
 				String error = check_fields();
 				if (error.length() > 1) {
@@ -58,10 +57,8 @@ public class LoginMainActivity extends GlusterActivity {
 					try {
 						new LoginAuthentication(LoginMainActivity.this)
 								.execute(params);
-						// startActivity(intent);
 					} catch (Exception e) {
 						setErrorMessage();
-						// finish();
 					}
 				}
 
@@ -90,12 +87,6 @@ public class LoginMainActivity extends GlusterActivity {
 	public void afterLoginPageChange(int id) {
 		Bundle nextPageParams = new Bundle();
 		nextPageParams.putString("url", sHostName);
-		/*
-		 * SharedPreferences.Editor prefEditor = loginCred.edit();
-		 * prefEditor.putString("url", sHostName);
-		 * prefEditor.putString("password", sPassword);
-		 * prefEditor.putString("userName", sUser); prefEditor.commit();
-		 */
 		Intent nextPage = new Intent(LoginMainActivity.this,
 				ClusterDisplayActivity.class);
 		nextPage.putExtras(nextPageParams);
@@ -103,9 +94,7 @@ public class LoginMainActivity extends GlusterActivity {
 	}
 
 	private void setPage() {
-		System.out.println("\n" + loginCred.getString("userName", null) + "\n"
-				+ loginCred.getString("url", null) + "\n");
-		userName.setText(loginCred.getString("userName", null));
+        userName.setText(loginCred.getString("userName", null));
 		hostname.setText(loginCred.getString("url", null));
 	}
 
@@ -173,11 +162,4 @@ public class LoginMainActivity extends GlusterActivity {
 	public String getsHostName() {
 		return hostname.getText().toString();
 	}
-	/*
-	 * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the
-	 * menu; this adds items to the action bar if it is present.
-	 * getMenuInflater().inflate(R.menu.activity_login_main, menu); return true;
-	 * }
-	 */
-
 }

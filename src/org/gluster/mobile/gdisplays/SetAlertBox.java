@@ -52,7 +52,7 @@ public class SetAlertBox {
 		}
 		case 2: {
 			alertDialogBuilder
-					.setTitle("Post Request Status")
+					.setTitle("Request Status")
 					.setMessage(message)
 					.setPositiveButton("Ok",
 							new DialogInterface.OnClickListener() {
@@ -87,6 +87,7 @@ public class SetAlertBox {
 							});
 			break;
 		}
+
 		}
 		AlertDialog alertDialog = alertDialogBuilder.create();
 		alertDialog.show();
