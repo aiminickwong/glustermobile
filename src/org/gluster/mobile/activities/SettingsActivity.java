@@ -26,7 +26,6 @@ public class SettingsActivity extends GlusterActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				SharedPreferences.Editor prefEditor = loginCred.edit();
 				prefEditor.putString("url", hostName.getText().toString());
 				prefEditor.putString("userName", userName.getText().toString());
@@ -47,7 +46,6 @@ public class SettingsActivity extends GlusterActivity {
 	}
 
 	private void setPage() {
-		// TODO Auto-generated method stub
 		userName.setText(loginCred.getString("userName", ""));
 		brickDir.setText(loginCred.getString("brickDir", ""));
 		hostName.setText(loginCred.getString("url", ""));

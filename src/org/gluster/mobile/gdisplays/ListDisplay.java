@@ -17,9 +17,7 @@ public class ListDisplay {
 	private int[] column_ids;
 	private String[] column_tags;
 
-	public ListDisplay(ListView lists, Context context,
-			List<HashMap<String, String>> listViewParams, int[] column_ids,
-			String[] column_tags) {
+	public ListDisplay(ListView lists, Context context, List<HashMap<String, String>> listViewParams, int[] column_ids, String[] column_tags) {
 		super();
 		this.lists = lists;
 		this.context = context;
@@ -72,12 +70,10 @@ public class ListDisplay {
 		if (listViewParams.size() == 0) {
 			String nothingToDisplay[] = new String[1];
 			nothingToDisplay[0] = "Nothing To Display";
-			ArrayAdapter<String> stringAdapter = new ArrayAdapter<String>(
-					context, R.layout.list_view_style, nothingToDisplay);
+			ArrayAdapter<String> stringAdapter = new ArrayAdapter<String>(context, R.layout.list_view_style, nothingToDisplay);
 			lists.setAdapter(stringAdapter);
 		} else {
-			SimpleAdapter adapter = new SimpleAdapter(context, listViewParams,
-					R.layout.list_view_row, column_tags, column_ids);
+			SimpleAdapter adapter = new SimpleAdapter(context, listViewParams, R.layout.list_view_row, column_tags, column_ids);
 			lists.setAdapter(adapter);
 		}
 	}

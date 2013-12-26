@@ -18,20 +18,13 @@ public class BrickOptionActivity extends TabActivity {
 		setContentView(R.layout.activity_brick_option);
 		String url = getIntent().getExtras().getString("url");
 		setTitle("Volume : " + getIntent().getExtras().getString("volumeName"));
-		String[] options_name = getIntent().getExtras().getStringArray(
-				"options");
-		System.out.println("fine here also after collecting bundles!!!");
+		String[] options_name = getIntent().getExtras().getStringArray("options");
 		TabHost tabHost = getTabHost();
-		if (tabHost.equals(null)) {
-			System.out.println("Null!!");
-		}
 		TabSpec bricks = tabHost.newTabSpec("Bricks");
 		bricks.setIndicator("Bricks");
 		Bundle volumeBrickUrl = new Bundle();
 		volumeBrickUrl.putString("url", url);
-		System.out.println("");
-		Intent volumesIntent = new Intent(BrickOptionActivity.this,
-				BrickDisplayActivity.class);
+		Intent volumesIntent = new Intent(BrickOptionActivity.this, BrickDisplayActivity.class);
 		volumesIntent.putExtras(volumeBrickUrl);
 		bricks.setContent(volumesIntent);
 
@@ -40,8 +33,7 @@ public class BrickOptionActivity extends TabActivity {
 		Bundle volumeOptions = new Bundle();
 
 		volumeOptions.putStringArray("options", options_name);
-		Intent volumeOptionIntent = new Intent(BrickOptionActivity.this,
-				OptionsActivity.class);
+		Intent volumeOptionIntent = new Intent(BrickOptionActivity.this, OptionsActivity.class);
 		volumeOptionIntent.putExtras(volumeOptions);
 		options.setContent(volumeOptionIntent);
 

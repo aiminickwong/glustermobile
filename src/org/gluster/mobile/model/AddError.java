@@ -8,47 +8,30 @@ import org.simpleframework.xml.Root;
 import org.gluster.mobile.model.GlusterEntity;
 
 @Root(name = "fault")
-public class AddError implements GlusterEntities {
+public class AddError implements GlusterErrors {
 	@Element(name = "reason")
 	private String reason;
 	@Element(name = "detail")
 	private String detail;
 
+    @Override
 	public String getReason() {
 		return reason;
 	}
 
+    @Override
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
 
+    @Override
 	public String getDetail() {
 		return detail;
 	}
 
+    @Override
 	public void setDetail(String detail) {
 		this.detail = detail;
-	}
-
-	@Override
-	public List<? extends GlusterEntity> getObjects() {
-		// TODO Auto-generated method stub
-		List<AddError> temp = new ArrayList<AddError>();
-		temp.add(this);
-		return (List<? extends GlusterEntity>) temp;
-	}
-
-	@Override
-	public void setObjects(List<? extends GlusterEntity> objects) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public <T extends GlusterEntity> void setObject(T obj) {
-		// TODO Auto-generated method stub
-		List<AddError> temp = new ArrayList<AddError>();
-		temp.add((AddError) obj);
 	}
 
 }

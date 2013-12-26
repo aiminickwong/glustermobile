@@ -13,10 +13,8 @@ public class EntitySerializer {
 		try {
 			persist.write(object, out);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(out.toString());
 		return out.toString();
 	}
 

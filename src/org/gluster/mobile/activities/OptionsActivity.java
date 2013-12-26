@@ -26,21 +26,18 @@ public class OptionsActivity extends GlusterActivity<Option> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_options);
 		init();
-		new ListDisplay(lists, getApplicationContext(), listViewParams,
-				column_ids, column_tags).display();
+		new ListDisplay(lists, getApplicationContext(), listViewParams, column_ids, column_tags).display();
 
 	}
 
 	private void init() {
 		options = getIntent().getExtras().getStringArray("options");
 		setListViewParameter();
-		System.out.println(options.length + "inoptions activity!!!");
 		lists = (ListView) findViewById(R.id.listView1);
 
 	}
 
 	private void setListViewParameter() {
-		// TODO Auto-generated method stub
 		listViewParams = new ArrayList<HashMap<String, String>>();
 		for (int i = 0; i < options.length; i++) {
 			HashMap<String, String> option = new HashMap<String, String>();
@@ -61,7 +58,6 @@ public class OptionsActivity extends GlusterActivity<Option> {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_options, menu);
 		return true;
 	}
