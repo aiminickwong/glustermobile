@@ -3,11 +3,11 @@ package org.gluster.mobile.gdisplays;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gluster.mobile.model.Brick;
-import org.gluster.mobile.model.Cluster;
-import org.gluster.mobile.model.GlusterEntity;
-import org.gluster.mobile.model.Host;
-import org.gluster.mobile.model.Volume;
+import org.gluster.mobile.model.entities.Brick;
+import org.gluster.mobile.model.entities.Cluster;
+import org.gluster.mobile.model.entities.GlusterEntity;
+import org.gluster.mobile.model.entities.Host;
+import org.gluster.mobile.model.entities.Volume;
 
 import android.widget.TextView;
 

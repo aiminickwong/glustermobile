@@ -8,11 +8,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ShowAlert;
-import org.gluster.mobile.model.GlusterEntities;
-import org.gluster.mobile.model.GlusterEntity;
-import org.gluster.mobile.model.Host;
+import org.gluster.mobile.model.entities.GlusterEntities;
+import org.gluster.mobile.model.entities.GlusterEntity;
 import org.gluster.mobile.params.AsyncTaskParameter;
-import org.gluster.mobile.xml.XmlDeSerializer;
+import org.gluster.mobile.parsers.XmlDeSerializer;
 import org.apache.http.client.methods.HttpGet;
 
 import java.util.List;

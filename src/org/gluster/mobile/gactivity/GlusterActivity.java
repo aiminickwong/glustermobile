@@ -2,7 +2,7 @@ package org.gluster.mobile.gactivity;
 
 import java.util.List;
 
-import org.gluster.mobile.model.GlusterEntity;
+import org.gluster.mobile.model.entities.GlusterEntity;
 
 import android.app.Activity;
 

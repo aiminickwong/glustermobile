@@ -1,4 +1,4 @@
-package org.gluster.mobile.model;
+package org.gluster.mobile.model.entities;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;

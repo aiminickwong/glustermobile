@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
-import org.gluster.mobile.model.Option;
+import org.gluster.mobile.model.entities.Option;
 import org.gluster.mobile.params.SettingsHandler;
 
 import android.os.Bundle;

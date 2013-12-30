@@ -1,14 +1,14 @@
 package org.gluster.mobile.activities;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
-import org.gluster.mobile.model.AddError;
-import org.gluster.mobile.model.Cluster;
-import org.gluster.mobile.model.DataCenter;
+import org.gluster.mobile.model.errors.AddError;
+import org.gluster.mobile.model.entities.Cluster;
+import org.gluster.mobile.model.entities.DataCenter;
 import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.GlusterHttpPostApi;
-import org.gluster.mobile.xml.EntitySerializer;
+import org.gluster.mobile.parsers.EntitySerializer;
 
 import android.content.Intent;
 import android.os.Bundle;

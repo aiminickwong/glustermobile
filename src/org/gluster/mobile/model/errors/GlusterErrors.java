@@ -1,4 +1,4 @@
-package org.gluster.mobile.model;
+package org.gluster.mobile.model.errors;
 
 /**
  * Created by ababu on 12/26/13.

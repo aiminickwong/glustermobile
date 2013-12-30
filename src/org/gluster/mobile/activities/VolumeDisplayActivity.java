@@ -6,14 +6,12 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
-import org.gluster.mobile.gdisplays.SetAlertBox;
 import org.gluster.mobile.gdisplays.ShowAlert;
-import org.gluster.mobile.model.StartStopError;
-import org.gluster.mobile.model.Volume;
-import org.gluster.mobile.model.Volumes;
+import org.gluster.mobile.model.errors.StartStopError;
+import org.gluster.mobile.model.entities.Volume;
+import org.gluster.mobile.model.entities.Volumes;
 import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
-import org.gluster.mobile.web.ConnectionUtil;
 import org.gluster.mobile.web.GlusterHttpGetApi;
 import org.gluster.mobile.web.GlusterHttpPostApi;
 

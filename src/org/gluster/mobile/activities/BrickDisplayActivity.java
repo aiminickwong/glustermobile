@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
-import org.gluster.mobile.model.Brick;
-import org.gluster.mobile.model.Bricks;
+import org.gluster.mobile.model.entities.Brick;
+import org.gluster.mobile.model.entities.Bricks;
 import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.GlusterHttpGetApi;

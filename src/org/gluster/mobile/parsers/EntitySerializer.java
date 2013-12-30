@@ -1,9 +1,9 @@
-package org.gluster.mobile.xml;
+package org.gluster.mobile.parsers;
 
 import java.io.StringWriter;
 import java.io.Writer;
 
-import org.gluster.mobile.model.GlusterEntity;
+import org.gluster.mobile.model.entities.GlusterEntity;
 import org.simpleframework.xml.core.Persister;
 
 public class EntitySerializer {

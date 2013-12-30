@@ -1,11 +1,7 @@
-package org.gluster.mobile.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.gluster.mobile.model.errors;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
-import org.gluster.mobile.model.GlusterEntity;
 
 @Root(name = "fault")
 public class AddError implements GlusterErrors {

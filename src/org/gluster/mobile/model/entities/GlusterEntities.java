@@ -1,4 +1,4 @@
-package org.gluster.mobile.model;
+package org.gluster.mobile.model.entities;
 
 import java.util.List;
 

@@ -1,10 +1,6 @@
-package org.gluster.mobile.model;
-
-import java.util.ArrayList;
+package org.gluster.mobile.model.entities;
 
 import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 @Root(name = "gluster_volume")

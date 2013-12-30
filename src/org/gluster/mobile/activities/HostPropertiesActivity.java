@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.SetTextView;
-import org.gluster.mobile.model.Host;
+import org.gluster.mobile.model.entities.Host;
 import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.GlusterHttpGetApi;

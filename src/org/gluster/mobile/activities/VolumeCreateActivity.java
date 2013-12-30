@@ -3,13 +3,12 @@ package org.gluster.mobile.activities;
 import java.util.ArrayList;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
-import org.gluster.mobile.gdisplays.SetAlertBox;
-import org.gluster.mobile.model.Host;
-import org.gluster.mobile.model.Option;
-import org.gluster.mobile.model.Options;
-import org.gluster.mobile.model.VolumeCreate;
+import org.gluster.mobile.model.entities.Host;
+import org.gluster.mobile.model.entities.Option;
+import org.gluster.mobile.model.entities.Options;
+import org.gluster.mobile.model.entities.VolumeCreate;
 import org.gluster.mobile.params.SettingsHandler;
-import org.gluster.mobile.xml.EntitySerializer;
+import org.gluster.mobile.parsers.EntitySerializer;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

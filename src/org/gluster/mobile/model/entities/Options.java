@@ -1,10 +1,9 @@
-package org.gluster.mobile.model;
+package org.gluster.mobile.model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 @Root(name = "options")

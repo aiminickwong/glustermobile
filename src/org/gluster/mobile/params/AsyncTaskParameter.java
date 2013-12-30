@@ -10,18 +10,36 @@ import org.gluster.mobile.gactivity.GlusterActivity;
  * Created by ababu on 12/26/13.
  */
 public class AsyncTaskParameter<G> {
-    //private GlusterActivity activity;
+    private  static AsyncTaskParameter asyncTaskParameter;
     private String url;
     private  Class className;
     private Context context;
     private Class intentActivity;
     private String requestBody = "";
     private GlusterActivity activity;
+    private int urlEntityMapKey;
+
+    public static AsyncTaskParameter getAsyncTaskParameter() {
+        return asyncTaskParameter;
+    }
+
+    public static void setAsyncTaskParameter(Context context, String url, Class className, GlusterActivity currentActivity) {
+        asyncTaskParameter = new AsyncTaskParameter(context, url, className.getClass());
+        asyncTaskParameter.setActivity(currentActivity);
+    }
 
     public AsyncTaskParameter(Context context, String url, Class className) {
         this.context = context;
         this.url = url;
         this.className = className;
+    }
+
+    public int getUrlEntityMapKey() {
+        return urlEntityMapKey;
+    }
+
+    public void setUrlEntityMapKey(int urlEntityMapKey) {
+        this.urlEntityMapKey = urlEntityMapKey;
     }
 
     public Class getIntentActivity() {

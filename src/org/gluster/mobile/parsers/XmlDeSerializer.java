@@ -1,4 +1,4 @@
-package org.gluster.mobile.xml;
+package org.gluster.mobile.parsers;
 
 import org.simpleframework.xml.core.Persister;
 

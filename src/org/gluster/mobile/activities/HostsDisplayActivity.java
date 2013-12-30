@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
-import org.gluster.mobile.model.Host;
-import org.gluster.mobile.model.Hosts;
+import org.gluster.mobile.model.entities.Host;
+import org.gluster.mobile.model.entities.Hosts;
 import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.ConnectionUtil;

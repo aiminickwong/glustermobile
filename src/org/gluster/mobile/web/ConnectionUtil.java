@@ -15,7 +15,16 @@ public class ConnectionUtil {
 	private static final ConnectionUtil instance = new ConnectionUtil();
 	private AbstractHttpClient client;
 	private static String hostp;
-	private int portId;
+
+    public int getPortId() {
+        return portId;
+    }
+
+    public void setPortId(int portId) {
+        this.portId = portId;
+    }
+
+    private int portId;
 
 	private ConnectionUtil() {
 		client = null;

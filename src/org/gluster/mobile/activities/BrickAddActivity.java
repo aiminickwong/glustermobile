@@ -6,19 +6,18 @@ import java.util.List;
 
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ListDisplay;
-import org.gluster.mobile.model.AddError;
-import org.gluster.mobile.model.Brick;
-import org.gluster.mobile.model.Bricks;
-import org.gluster.mobile.model.Host;
-import org.gluster.mobile.model.Hosts;
-import org.gluster.mobile.model.VolumeCreate;
-import org.gluster.mobile.model.Volumes;
+import org.gluster.mobile.model.errors.AddError;
+import org.gluster.mobile.model.entities.Brick;
+import org.gluster.mobile.model.entities.Bricks;
+import org.gluster.mobile.model.entities.Host;
+import org.gluster.mobile.model.entities.Hosts;
+import org.gluster.mobile.model.entities.VolumeCreate;
 import org.gluster.mobile.params.AsyncTaskParameter;
 import org.gluster.mobile.params.SettingsHandler;
 import org.gluster.mobile.web.GlusterHttpGetApi;
 import org.gluster.mobile.web.GlusterHttpPostApi;
-import org.gluster.mobile.xml.EntitySerializer;
-import org.gluster.mobile.xml.XmlDeSerializer;
+import org.gluster.mobile.parsers.EntitySerializer;
+import org.gluster.mobile.parsers.XmlDeSerializer;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

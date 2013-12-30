@@ -9,9 +9,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
 import org.gluster.mobile.gactivity.GlusterActivity;
 import org.gluster.mobile.gdisplays.ShowAlert;
-import org.gluster.mobile.model.GlusterErrors;
+import org.gluster.mobile.model.errors.GlusterErrors;
 import org.gluster.mobile.params.AsyncTaskParameter;
-import org.gluster.mobile.xml.XmlDeSerializer;
+import org.gluster.mobile.parsers.XmlDeSerializer;
 
 /**
  * Created by Anmol babu on 12/26/13.
